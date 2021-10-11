@@ -398,12 +398,16 @@ function peg$parse(input, options) {
       peg$c171 = peg$literalExpectation("stream", false),
       peg$c172 = "returns",
       peg$c173 = peg$literalExpectation("returns", false),
-      peg$c174 = function(a, b, c, d, e, f) { 
-      	if(b && b[0] == "stream")
-          	c.stream = true;
-          if(d && d[0] == "stream")
-          	e.stream = true;
-          if( f == ";" )
+      peg$c174 = function(a, b, c, d, e, f) {
+      	if(b && b[0] == 'stream') {
+      	    c = typeof c !== 'object' ? {} : c
+              c.stream = true;
+          }
+          if(d && d[0] == 'stream') {
+              e = typeof e !== 'object' ? {} : e
+              e.stream = true;
+          }
+          if( f == ';' )
           	f = {};
       	return { type: "rpc", name: a, param: c, returns: e, opts: f } 
       },
