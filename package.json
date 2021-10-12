@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/Q4Justice/q4j-proto-parse.git"
   },
+  "publishConfig": {
+    "@q4justice:registry": "https://npm.pkg.github.com/"
+  },
   "keywords": [
     "proto",
     "protobuf",
