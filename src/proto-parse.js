@@ -1,8 +1,12 @@
 const parser = require('./parser.js');
 
-function parse(proto){
-	var data = parser.parse(proto);
-	return data;
+/**
+ * Parses a string representation of a protofile
+ * @param {String} proto - The protofile string
+ * @returns {Object} An AST
+ */
+function parse(proto) {
+    return parser.parse(proto);
 }
 
 module.exports = parse;
