@@ -151,7 +151,13 @@ range = intLit ws "to" ws intLit / intLit
 ranges = range ( ws? "," ws? (range) )*
 reservedFieldName = ("'" fieldName "'") / ('"' fieldName '"')
 reservedFieldNames = reservedFieldName ("," reservedFieldName)*
-reserved = "reserved" ws ( ranges / reservedFieldNames ) ";"
+reserved = "reserved" ws a:( ranges / reservedFieldNames ) ";"
+{
+    return {
+        type: 'reserved',
+        values: a == null ? null : a,
+    }
+}
 
 enum = "enum" ws? a:enumName ws? b:enumBody
 { return {type: 'enum', name: a, content: b.content, opts: b.opts } }
