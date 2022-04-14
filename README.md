@@ -1,4 +1,5 @@
 # q4j-proto-parse
+
 > Utility to parse a proto3 file, forked from [lal12/proto-parse](https://github.com/lal12/proto-parse)
 
 ## Usage
@@ -17,7 +18,7 @@ The function returns an array containing the following elements:
 ```
 {
     "syntax": "proto3",
-    "content": [ 
+    "content": [
         // The top level elements, see below
     ]
 }
@@ -61,7 +62,7 @@ The function returns an array containing the following elements:
 {
     "type": "message",
     "name": "MY_MESSAGE" // Name of the message
-    "content": [ 
+    "content": [
      // Contains messages, fields, enums, etc.
     ]
 }
@@ -268,9 +269,10 @@ turns into:
   ]
 }
 ```
+
 ## Contributing
 
-### Change the parsing rules 
+### Change the parsing rules
 
 1. Update the grammar in `proto.peg`
 2. Run `npm run build`. This generates a new `parser.js` file with the parsing rules.
