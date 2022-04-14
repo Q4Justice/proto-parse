@@ -1,5 +1,4 @@
 .prettierignore
 .prettierrc
-Makefile
 .eslintrc.json
 .github

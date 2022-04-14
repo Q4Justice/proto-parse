@@ -17,5 +17,5 @@ jobs:
           node-version: '16'
       - run: 'npm install'
         working-directory: ${{ github.workspace }}
-      - run: 'make check'
+      - run: 'npm run check'
         working-directory: ${{ github.workspace }}
