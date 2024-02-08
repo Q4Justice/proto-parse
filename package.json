@@ -5,7 +5,9 @@
     "main": "./src/proto-parse.js",
     "scripts": {
         "build": "node scripts/build.js",
-        "check": "npx eslint \"*/*.js\" && npx prettier --ignore-path \".prettierignore\" --check \"*/*.{js,json}\"",
+        "test": "npm run build && jest",
+        "prepare-publish": "npm i --package-lock-only && npm run build && npm run prettify",
+        "check-linter": "npx eslint \"*/*.js\" && npx prettier --ignore-path \".prettierignore\" --check \"*/*.{js,json}\"",
         "prettify": "npx eslint --fix \"*/*.js\" && npx prettier --ignore-path \".prettierignore\" --write \"*/*.{js,json}\""
     },
     "repository": {

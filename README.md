@@ -1,6 +1,6 @@
 # q4j-proto-parse
 
-> Utility to parse a proto3 file, forked from [lal12/proto-parse](https://github.com/lal12/proto-parse)
+> Utility to parse a gRPC proto3 file, forked from [lal12/proto-parse](https://github.com/lal12/proto-parse)
 
 ## Usage
 
@@ -272,20 +272,35 @@ turns into:
 
 ## Contributing
 
-### Change the parsing rules
-
 1. Update the grammar in `proto.peg`
-2. Run `npm run build`. This generates a new `parser.js` file with the parsing rules.
-
-### Test
-
-Run the `proto-parse.test.js` file.
-
-### Format and style
-
-Fix the formatting and styling issues according to ESLint and Prettier: `npm run prettify`
+2. Update the `.proto` file in `tests/assets` to test the grammar
+3. Run `npm test` to build and test the changes
+4. Run `npm run prettify` to lint
+5. When changes are ready to be submitted, see the notes on publishing below
 
 ### Publish a new version of the package
 
-1. Increment the package version number before submitting a PR
-2. After the PR is merged, the "Publish" workflow will automatically run to publish a new version of the package
+1. Increment the package version number
+2. Run `npm run prepare-publish`. This handles building and linting your changes
+3. Submit the PR
+4. After the PR is merged, the "Publish" workflow will automatically run to publish a new version of the package
+
+### Tests
+
+The test `proto-parse.test.js` checks if the test `.proto` file in `tests/assets` parses successfully. Test cases
+can be added directly to the test proto file.
+
+The test works by running the built grammar against the `.proto` file. This means that every time the grammar in 
+`proto.peg` is updated, it must be rebuilt! It's recommended to test using `npm test` since it will handle building 
+and testing.
+
+### Format and style
+
+Fix the formatting and styling issues according to the linter rules: `npm run prettify`
+
+### Debugging
+
+**I've updated the grammar, but my test continue to fail with the same error, no matter what I've changed**
+
+If you are running the tests NOT through `npm test`, then the likely issue is that your grammar needs to be 
+rebuilt. To do this, run `npm build`. See the notes on the tests above for more details.
