@@ -149,9 +149,20 @@ keyType = "int32" / "int64" / "uint32" / "uint64" / "sint32" / "sint64" /
 
 range = intLit ws "to" ws intLit / intLit
 ranges = range ( ws? "," ws? (range) )*
+
 reservedFieldName = ("'" fieldName "'") / ('"' fieldName '"')
 reservedFieldNames = reservedFieldName ( ws? "," ws? (reservedFieldName) )*
-reserved = "reserved" ws a:( ranges / reservedFieldNames ) ";"
+reservedField = "reserved" ws a:( ranges / reservedFieldNames ) ";"
+{
+    return {
+        type: 'reserved',
+        values: a == null ? null : a,
+    }
+}
+
+reservedEnumName = ("'" enumName "'") / ('"' enumName '"')
+reservedEnumNames = reservedEnumName ( ws? "," ws? (reservedEnumName) )*
+reservedEnumField = "reserved" ws a:( ranges / reservedEnumNames ) ";"
 {
     return {
         type: 'reserved',
@@ -161,7 +172,7 @@ reserved = "reserved" ws a:( ranges / reservedFieldNames ) ";"
 
 enum = "enum" ws? a:enumName ws? b:enumBody
 { return {type: 'enum', name: a, content: b.content, opts: b.opts } }
-enumBody = "{" a:(ws / option / enumField / emptyStatement)* "}"
+enumBody = "{" a:(ws / option / enumField / reservedEnumField / emptyStatement)* "}"
 { 
 	var opts = {};
     var content = [];
@@ -182,7 +193,7 @@ enumField = a:ident ws? "=" ws? b:intLit ws? c:(fieldOptionsParam)? ws? ";"
 }
 message = "message" ws a:messageName ws? b:messageBody
 { return {type: 'message', name: a, content: b.content, opts: b.opts } }
-messageBody = "{" a:( field / enum / message / option / oneof / mapField /reserved / emptyStatement / ws )* "}"
+messageBody = "{" a:( field / enum / message / option / oneof / mapField / reservedField / emptyStatement / ws )* "}"
 { 
 	var opts = {};
     var content = [];

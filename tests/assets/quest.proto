@@ -353,9 +353,11 @@ message Claim {
   repeated Contract contracts = 128;
 
   enum ClaimKind {
+    reserved 2, 5;
+    reserved "PROPERTY_DAMAGE", "PERSONAL_INJURY";
+
     UNKNOWN_CLAIM_KIND = 0;
     DEFAMATION = 1;
-    PROPERTY_DAMAGE = 2;
     BREACH_OF_CONTRACT_LOAN = 3;
   }
 }
