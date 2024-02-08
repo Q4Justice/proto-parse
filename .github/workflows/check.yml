@@ -5,6 +5,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
     steps:
       - uses: actions/checkout@v2
       - name: 'Ensure package.json version has been incremented'
@@ -16,6 +19,5 @@ jobs:
         with:
           node-version: '16'
       - run: 'npm install'
-        working-directory: ${{ github.workspace }}
-      - run: 'npm run check'
-        working-directory: ${{ github.workspace }}
+      - run: 'npm run check-linter'
+      - run: 'npm test'
